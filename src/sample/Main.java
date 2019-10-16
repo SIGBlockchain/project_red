@@ -28,7 +28,7 @@ public class Main extends Application {
 
     Scene MainWindowSetup(){
         GuiGrid.setPadding(new Insets(10, 10, 10, 10));
-        GuiGrid.setVgap(80);        // Vgap and Hgap are subject to change
+        GuiGrid.setVgap(80);        // Vgap and Hgap are subject to change as project progresses
         GuiGrid.setHgap(80);
 
         //************************************** uncomment to see example of grid after commenting out the following 3 functions
@@ -39,6 +39,7 @@ public class Main extends Application {
 //                GuiGrid.add(l1,i,j);
 //            }
 //        }
+        //********************************************
 
         // add info row to main GridPane
         InfoRow.setupInfoRow(GuiGrid);
