@@ -16,6 +16,8 @@ public class SendAurumRow {
 
         // button
 
+
+        // add to mainGrid
     }
 
 }
