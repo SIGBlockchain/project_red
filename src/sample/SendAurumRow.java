@@ -34,6 +34,8 @@ public class SendAurumRow {
         grid.add(amountField, 1, 1);
         grid.add(send, 0, 1);
 
+
+        // add to mainGrid
     }
 
 }

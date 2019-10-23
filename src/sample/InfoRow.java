@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 // 1st row of GUI pertains to the drawn out vision of GUI.
@@ -13,5 +14,6 @@ public class InfoRow {
 
         // text fields
 
+        // add to mainGrid
     }
 }
