@@ -36,7 +36,7 @@ public class Main extends Application {
         MiscRow.setupMiscRow(GuiGrid);
 
         // return new Scene using GridPane GuiGrid with all of its additions
-        return new Scene(GuiGrid,1000,800);
+        return new Scene(GuiGrid,800,800);
     }
 
 
