@@ -1,14 +1,10 @@
 package sample;
 
 
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.text.Text;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 // 2nd row of the GUI.
 public class SendAurumRow {
@@ -29,10 +25,10 @@ public class SendAurumRow {
         Button send = new Button("Send");
         //Add everything to pane
         grid.add(sendTo, 0, 0);
-        grid.add(sendToField, 2, 1);
+        grid.add(sendToField, 0, 1);
         grid.add(amount, 1, 0);
         grid.add(amountField, 1, 1);
-        grid.add(send, 0, 1);
+        grid.add(send, 2, 1);
 
 
         // add to mainGrid
