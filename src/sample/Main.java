@@ -1,5 +1,6 @@
 package sample;
 
+import com.sun.jna.Native;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
@@ -43,6 +44,14 @@ public class Main extends Application {
 
         // add info row to main GridPane
         InfoRow.setupInfoRow(GuiGrid);
+
+        //---------------------------------------------------------------------------------- awesome.go practice
+//        Go.Awesome awesome = (Go.Awesome) Native.load(
+//                "awesome", Go.Awesome.class);
+//
+//        System.out.printf("awesome.Add(12, 99) = %s\n", awesome.Add(12, 99));
+//        System.out.printf("awesome.Cosine(1.0) = %s\n", awesome.Cosine(1.0));
+        //----------------------------------------------------------------------------------------
 
         // add Send Aurum fields
         SendAurumRow.setupSendAurumRow(GuiGrid);
