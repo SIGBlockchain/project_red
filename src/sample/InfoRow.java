@@ -1,7 +1,9 @@
 package sample;
 
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 // 1st row of GUI pertains to the drawn out vision of GUI.
 public class InfoRow {
@@ -16,19 +18,19 @@ public class InfoRow {
         Text producerMessageLabel          = new Text("Message from Producer");
 
         // text fields
-        Textfield walletTextfield          = new TextField();
-        Textfield balanceTextfield         = new Textfield();
-        Textfield stateNonceTextfield      = new Textfield();
-        Textfield producerMessageTextfield = new Textfield();
+        TextField walletTextfield          = new TextField();
+        TextField balanceTextfield         = new TextField();
+        TextField stateNonceTextfield      = new TextField();
+        TextField producerMessageTextfield = new TextField();
 
         // add all to grid
         mainGrid.add(walletLabel, 0, 0);
-        mainGrid.add(walletTextfield, 1, 0);
-        mainGrid.add(balanceLabel, 0, 1);
+        mainGrid.add(walletTextfield, 0, 1);
+        mainGrid.add(balanceLabel, 1, 0);
         mainGrid.add(balanceTextfield, 1, 1);
-        mainGrid.add(stateNonceLabel, 0, 2);
-        mainGrid.add(stateNonceTextfield, 1, 2);
-        mainGrid.add(producerMessageLabel, 0, 3);
-        mainGrid.add(producerMessageTextfield, 1, 3);
+        mainGrid.add(stateNonceLabel, 2, 0);
+        mainGrid.add(stateNonceTextfield, 2, 1);
+        mainGrid.add(producerMessageLabel, 0, 7);
+        mainGrid.add(producerMessageTextfield, 0, 8);
     }
 }
