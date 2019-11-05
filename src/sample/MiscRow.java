@@ -6,7 +6,7 @@ import javafx.scene.layout.GridPane;
 // 3rd row that will be used for messages from producer and future additions
 public class MiscRow {
 
-    public static void setupMiscRow(GridPane grid){
+    public static void setupMiscRow(GridPane mainGrid){
         // Labels for text fields
 
 
@@ -14,7 +14,7 @@ public class MiscRow {
 
         // update button
         Button updateBtn = new Button("Update");
-        grid.add(updateBtn, 1,2);
+        mainGrid.add(updateBtn, 3,1);
 
 
     }
