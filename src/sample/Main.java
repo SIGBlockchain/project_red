@@ -22,6 +22,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         primaryStage.setTitle("Aurum Project Red");
+        InfoRow.runClientExe("--info");         // get the users info first
         primaryStage.setScene(MainWindowSetup());
         primaryStage.show();
     }
@@ -51,6 +52,6 @@ public class Main extends Application {
         MiscRow.setupMiscRow(GuiGrid);
 
         // return new Scene using GridPane GuiGrid with all of its additions
-        return new Scene(GuiGrid,800,800);                                  // size of the scene is subject to change as well
+        return new Scene(GuiGrid,1200,800);                                  // size of the scene is subject to change as well
     }
 }

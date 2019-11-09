@@ -11,3 +11,8 @@ out/production/project_red/sample/Main.class
 out/production/project_red/sample/MiscRow.class
 out/production/project_red/sample/SendAurumRow.class
 project_red.iml
+src/.idea/workspace.xml
+src/.idea/modules.xml
+src/.idea/misc.xml
+src/.idea/libraries/javafx_swt.xml
+src/.idea/encodings.xml
