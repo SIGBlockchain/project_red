@@ -40,8 +40,6 @@ public class InfoRow {
         mainGrid.add(stateNonceTextfield, 2, 1);
         mainGrid.add(producerMessageLabel, 0, 7);
         mainGrid.add(producerMessageTextfield, 0, 8);
-
-//        runClientExe("--info");
     }
 
     public static void runClientExe(String param1){
@@ -58,10 +56,10 @@ public class InfoRow {
             // wallet address
             // state nonce
             // balance
-//            System.out.println("Output ");
             while((line = br.readLine()) != null){
                 System.out.println(line);
-                clientInfo.add(line);
+                String[] strArr = line.split(": ");
+                clientInfo.add(strArr[1]);
             }
         }catch(Exception e){
             e.printStackTrace();
