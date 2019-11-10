@@ -22,6 +22,10 @@ public class SendAurumRow {
         // button
         Button send = new Button("Send");
 
+        send.setOnAction((event) -> {
+            InfoRow.RunClientExe("--send",amountField.getText(),"--to",sendToField.getText());
+        });
+
         // add to mainGrid
         mainGrid.add(sendTo, 0, 2);
         mainGrid.add(sendToField, 0, 3);

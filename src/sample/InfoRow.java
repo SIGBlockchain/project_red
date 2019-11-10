@@ -15,6 +15,10 @@ import java.util.Arrays;
 public class InfoRow {
 
     static ArrayList<String> clientInfo = new ArrayList<>();     // stores the user info
+    static Label walletTextfield;
+    static Label stateNonceTextfield;
+    static Label balanceTextfield;
+    static Label producerMessageTextfield;
 
     // sets up row 1 of the GUI will modify the GridPane
     // everything that is going to be set into the grid, add it to mainGrid
@@ -26,10 +30,10 @@ public class InfoRow {
         Text producerMessageLabel          = new Text("Message from Producer");
 
         // text fields
-        Label walletTextfield              = new Label(clientInfo.get(0));
-        Label stateNonceTextfield          = new Label(clientInfo.get(1));
-        Label balanceTextfield             = new Label(clientInfo.get(2));
-        TextField producerMessageTextfield = new TextField();
+        walletTextfield              = new Label("NONE");
+        stateNonceTextfield          = new Label("NONE");
+        balanceTextfield             = new Label("NONE");
+        producerMessageTextfield     = new Label("CANNOT GET INFO");
 
         // add all to grid
         mainGrid.add(walletLabel, 0, 0);
@@ -42,24 +46,52 @@ public class InfoRow {
         mainGrid.add(producerMessageTextfield, 0, 8);
     }
 
-    public static void runClientExe(String param1){
+    public static void RunClientExe(String param1, String param2, String param3, String param4){
         String cmd = System.getProperty("user.dir") + "\\aurum_client.exe";
         try{
-            System.out.println("cmd: "+ cmd + " param 1: " + param1);
-            Process process = new ProcessBuilder(cmd,param1).start();
+            System.out.println("cmd: "+ cmd + " param 1: " + param1 +"\n\n");
+            Process process;
+
+            // attempting a transaction
+            if(param1.compareTo("--send") == 0 && param3.compareTo("--to") == 0){
+                System.out.printf("want to send %s to %s \n\n", param2, param4);
+                process = new ProcessBuilder(cmd,param1,param2,param3,param4).start();
+            }
+
+            // else info or update so no need to use the param2,3, or 4
+            else{
+                process = new ProcessBuilder(cmd,param1).start();
+            }
+
             InputStream is = process.getInputStream();
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader br = new BufferedReader(isr);
-            String line;
+            String line = "";
 
-            // we get the info in the order of
-            // wallet address
-            // state nonce
-            // balance
-            while((line = br.readLine()) != null){
-                System.out.println(line);
-                String[] strArr = line.split(": ");
-                clientInfo.add(strArr[1]);
+            switch(param1){
+                case "--info":
+                    if(br.read() == -1){
+                        System.out.println("Failed to get wallet contents");
+                        producerMessageTextfield.setText("Failed to get wallet contents");
+                    }
+                    while((line = br.readLine()) != null) {
+                        System.out.println(line);
+                        String[] strArr = line.split(": ");
+                        clientInfo.add(strArr[1]);
+                    }
+                    // display values
+                    walletTextfield.setText(clientInfo.get(0));
+                    stateNonceTextfield.setText(clientInfo.get(1));
+                    balanceTextfield.setText(clientInfo.get(2));
+                    producerMessageTextfield.setText("STATUS: OK");
+                    break;
+                case "--update":
+                    RunClientExe("--info",null,null,null);         // call for info to be displayed
+                    break;
+                case "--send":
+                    while((line = br.readLine()) != null){
+                        System.out.println(line);
+                    }
             }
         }catch(Exception e){
             e.printStackTrace();

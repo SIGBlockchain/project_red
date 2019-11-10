@@ -16,6 +16,9 @@ public class MiscRow {
         Button updateBtn = new Button("Update");
         mainGrid.add(updateBtn, 3,1);
 
+        updateBtn.setOnAction((event) -> {
+            InfoRow.RunClientExe("--update",null,null,null);
+        });
 
     }
 }
