@@ -14,7 +14,6 @@ import java.util.Arrays;
 // 1st row of GUI pertains to the drawn out vision of GUI.
 public class InfoRow {
 
-    static ArrayList<String> clientInfo = new ArrayList<>();     // stores the user info
     static Label walletTextfield;
     static Label stateNonceTextfield;
     static Label balanceTextfield;
@@ -66,6 +65,7 @@ public class InfoRow {
             InputStream is = process.getInputStream();
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader br = new BufferedReader(isr);
+            ArrayList<String> clientInfo = new ArrayList<>();     // stores the user info
             String line = "";
 
             switch(param1){
@@ -76,10 +76,9 @@ public class InfoRow {
                     }
                     while((line = br.readLine()) != null) {
                         System.out.println(line);
-                        String[] strArr = line.split(": ");
+                        String[] strArr = line.split(":");
                         clientInfo.add(strArr[1]);
                     }
-                    // display values
                     walletTextfield.setText(clientInfo.get(0));
                     stateNonceTextfield.setText(clientInfo.get(1));
                     balanceTextfield.setText(clientInfo.get(2));
@@ -88,7 +87,7 @@ public class InfoRow {
                 case "--update":
                     RunClientExe("--info",null,null,null);         // call for info to be displayed
                     break;
-                case "--send":
+                case "--send":                                    // do computation here and update wallet after a send?
                     while((line = br.readLine()) != null){
                         System.out.println(line);
                     }
