@@ -1,5 +1,7 @@
 package sample;
 
+
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
@@ -12,21 +14,20 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Main extends Application {
+public class App extends Application {
     public GridPane GuiGrid = new GridPane();
 
     public static void main(String[] args) {
         launch(args);
     }
-
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Aurum Project Red");
         primaryStage.setScene(MainWindowSetup());
         primaryStage.show();
     }
 
-    Scene MainWindowSetup(){
+    Scene MainWindowSetup() {
         GuiGrid.setPadding(new Insets(10, 10, 10, 10));
         GuiGrid.setVgap(80);        // Vgap and Hgap are subject to change as project progresses
         GuiGrid.setHgap(80);
@@ -51,6 +52,6 @@ public class Main extends Application {
         MiscRow.setupMiscRow(GuiGrid);
 
         // return new Scene using GridPane GuiGrid with all of its additions
-        return new Scene(GuiGrid,800,800);                                  // size of the scene is subject to change as well
+        return new Scene(GuiGrid, 800, 800);                                  // size of the scene is subject to change as well
     }
 }

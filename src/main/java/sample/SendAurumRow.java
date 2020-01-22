@@ -10,7 +10,7 @@ public class SendAurumRow {
 
     // sets up row 2 of GUI
     // everything that is going to be set into the grid, add it to mainGrid
-    public static void setupSendAurumRow(GridPane mainGrid){
+    public static void setupSendAurumRow(GridPane mainGrid) {
         // Labels for text fields
         Text sendTo = new Text("Send To");
         Text amount = new Text("Amount");
