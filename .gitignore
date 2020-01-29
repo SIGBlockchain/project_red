@@ -4,6 +4,7 @@
 .idea/misc.xml
 .idea/modules.xml
 .idea/workspace.xml
+.idea
 out/production/project_red/module-info.class
 out/production/project_red/sample/Controller.class
 out/production/project_red/sample/InfoRow.class
