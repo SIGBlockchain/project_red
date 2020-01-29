@@ -39,7 +39,7 @@ jlink {
     options = ['--bind-services', '--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
 
     launcher {
-        name = 'helloFX'
+        name = "Project Red"
     }
 
     jpackage {
@@ -49,5 +49,4 @@ jlink {
             installerOptions = ['--win-per-user-install', '--win-menu', '--win-shortcut', '--win-dir-chooser']
         }
     }
-
 }
