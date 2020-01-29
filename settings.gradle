@@ -1,5 +1,5 @@
 rootProject.name = 'Project Red'
 
-String[] modules = ['sigblockchain.projectred.gui']
+String[] modules = ['gui']
 
 include modules
