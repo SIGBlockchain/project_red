@@ -4,4 +4,5 @@ module sigblockchain.projectred.gui {
 
     opens sigblockchain.projectred.gui to javafx.fxml;
     exports sigblockchain.projectred.gui;
+
 }
