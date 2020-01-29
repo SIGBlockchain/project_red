@@ -13,12 +13,12 @@ javafx {
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
-//mainClassName = "$moduleName/sigblockchain.projectred.gui.Main"
+//mainClassName = "$moduleName/sigblockchain.projectred.gui.Entry"
 
 
 
 application {
-   mainClassName = "$moduleName/sigblockchain.projectred.gui.Main"
+   mainClassName = "$moduleName/sigblockchain.projectred.gui.Entry"
 }
 
 
