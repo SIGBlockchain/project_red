@@ -1,11 +1,5 @@
 package sigblockchain.projectred.keys;
 
-import org.bouncycastle.asn1.sec.SECNamedCurves;
-import org.bouncycastle.asn1.x9.X9ECParameters;
-import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
-import org.bouncycastle.crypto.generators.ECKeyPairGenerator;
-import org.bouncycastle.crypto.params.ECDomainParameters;
-import org.bouncycastle.crypto.params.ECKeyGenerationParameters;
 import org.bouncycastle.crypto.params.ECPrivateKeyParameters;
 import org.bouncycastle.crypto.params.ECPublicKeyParameters;
 import org.bouncycastle.math.ec.ECPoint;
@@ -13,15 +7,12 @@ import org.bouncycastle.math.ec.FixedPointCombMultiplier;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigInteger;
-import java.security.SecureRandom;
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 class KeyManagerTest {
-    
+
     @Test
     public void testGenerateKeyPair() {
         var keyPair = KeyManager.generateKeyPair();
