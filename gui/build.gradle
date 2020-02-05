@@ -47,6 +47,10 @@ jlink {
             installerType = "exe"
             jpackageHome = "C:\\Program Files\\Java\\jdk-14"
             installerOptions = ['--win-per-user-install', '--win-menu', '--win-shortcut', '--win-dir-chooser']
+        }else if (org.gradle.internal.os.OperatingSystem.current().linux){
+            installerType = "deb"
+            jpackageHome = "/usr/lib/jvm/java-14-openjdk-amd64"
+            installerOptions = ['--linux-shortcut']
         }
     }
 }
