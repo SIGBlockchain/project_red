@@ -6,9 +6,14 @@ import org.bouncycastle.math.ec.ECPoint;
 import org.bouncycastle.math.ec.FixedPointCombMultiplier;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
+import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class KeyManagerTest {
@@ -44,5 +49,43 @@ class KeyManagerTest {
         assertEquals(actualPublicKey.getQ().getRawXCoord().toBigInteger(), expectedPublicKeyX);
         assertEquals(actualPublicKey.getQ().getRawYCoord().toBigInteger(), expectedPublicKeyY);
 
+    }
+
+    public boolean streamsAreTheSame(InputStream is1, InputStream is2) throws IOException {
+        if ((is1 == null && is2 != null) || (is1 != null && is2 == null))
+            return false;
+        if (is1 == is2)
+            return true;
+        var actualBuffer = new byte[1024];
+        var expectedBuffer = new byte[1024];
+        int bytesRead;
+        while ((bytesRead = is1.read(actualBuffer)) != -1) {
+            if (is2.read(expectedBuffer) != bytesRead)
+                return false;
+            if (!Arrays.equals(expectedBuffer, 0, bytesRead, actualBuffer, 0, bytesRead))
+                return false;
+        }
+        return true;
+
+    }
+
+    @Test
+    public void testSavePrivateKey1() {
+        var d = new BigInteger("e66614b9d32c2c9cc00bde7751d0b50e395c486181deb5a07acffff5fffeaacf", 16);
+        var privateKey = new ECPrivateKeyParameters(d, KeyManager.domainParams);
+        KeyManager.savePrivateKeyToFile(privateKey, "key");
+
+        try {
+            InputStream actualIn = KeyManager.class.getClassLoader().getResourceAsStream("key.pem");
+            InputStream expectedIn = ClassLoader.getSystemClassLoader().getResourceAsStream("tetsKey.pem");
+            if (actualIn == null || expectedIn == null) {
+                fail("Failed to get resource");
+            }
+
+            assertTrue(streamsAreTheSame(actualIn, expectedIn), "File contents are not the same");
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail("failed to open file(s)");
+        }
     }
 }
