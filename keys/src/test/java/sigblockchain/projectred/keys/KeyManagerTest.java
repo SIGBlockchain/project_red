@@ -88,4 +88,24 @@ class KeyManagerTest {
             fail("failed to open file(s)");
         }
     }
+
+    @Test
+    public void testSavePrivateKey2() {
+        var d = new BigInteger("3775c53962cc507ced257b089031db955bd433b5fd6cfcde0351b8762d5d6244", 16);
+        var privateKey = new ECPrivateKeyParameters(d, KeyManager.domainParams);
+        KeyManager.savePrivateKeyToFile(privateKey, "key2"); //the file should not be
+
+        try {
+            InputStream actualIn = KeyManager.class.getClassLoader().getResourceAsStream("key2.pem");
+            InputStream expectedIn = ClassLoader.getSystemClassLoader().getResourceAsStream("tetsKey2.pem");
+            if (actualIn == null || expectedIn == null) {
+                fail("Failed to get resource");
+            }
+
+            assertTrue(streamsAreTheSame(actualIn, expectedIn), "File contents are not the same");
+        } catch (IOException e) {
+            e.printStackTrace();
+            fail("failed to open file(s)");
+        }
+    }
 }
