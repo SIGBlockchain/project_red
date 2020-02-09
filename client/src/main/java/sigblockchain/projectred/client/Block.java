@@ -3,17 +3,17 @@ package sigblockchain.projectred.client;
 import java.math.BigInteger;
 
 public class Block {
-    private final int Version;          // uint16
-    private final BigInteger Height;          // uint64
-    private final long Timestamp;
-    private final byte[] PreviousHash;
-    private final byte[] MerkleRootHash;
-    private final int DataLen;          // uint16
-    private final byte[][] Data;        // [][]byte
+    private final int version;              // uint16
+    private final BigInteger height;        // uint64
+    private final long timestamp;           // int64
+    private final byte[] previousHash;      // []byte
+    private final byte[] merkleRootHash;    // []byte
+    private final int dataLen;              // uint16
+    private final byte[][] data;            // [][]byte
 
     /**
-     * @param version        Version of the blockchain the block was created on
-     * @param height         A hex encoded 2's complement 64 bit integer string (without the prefix '0x'). Note, the height cannot be negative Represents the height of the block in the blokcchain.
+     * @param version        Version of the blockChain the block was created on
+     * @param height         A hex encoded 2's complement 64 bit integer string (without the prefix '0x'). Note, the height cannot be negative Represents the height of the block in the blockChain.
      * @param timestamp      Unix time, representing the number of nanoseconds elapsed since January 1, 1970 UTC
      * @param previousHash   Hash of the previous block
      * @param merkleRootHash Hash of the merkle-root of all inputs
@@ -21,72 +21,83 @@ public class Block {
      * @param data           Actual contents of block
      */
     public Block(int version, String height, long timestamp, byte[] previousHash, byte[] merkleRootHash, int dataLen, byte[][] data) {
-        this.Height = new BigInteger(height, 16);
-        if (!checkCompatibility(version, this.Height, timestamp, dataLen))
-            throw new IllegalArgumentException("Invalid Input Values");
+        //Individual values Checking
+        if (checkUnsigned16(version))
+            throw new IllegalArgumentException("Invalid Input version");
+        if (!checkUnsigned64(new BigInteger(height, 16)))
+            throw new IllegalArgumentException("Invalid Input height");
+        if (!checkSigned64(timestamp))
+            throw new IllegalArgumentException("Invalid Input timeStamp");
+        if (checkUnsigned16(dataLen))
+            throw new IllegalArgumentException("Invalid Input dataLen");
 
-//        //Individual values Checking
-//        if (!checkUnsigned16(version))
-//            throw new IllegalArgumentException("Invalid Input version");
-//        if (!checkUnsigned64(height))
-//            throw new IllegalArgumentException("Invalid Input height");
-//        if (!checkSigned64(timestamp))
-//            throw new IllegalArgumentException("Invalid Input timeStamp");
-//        if (!checkUnsigned16(dataLen))
-//            throw new IllegalArgumentException("Invalid Input dataLen");
-
-        Version = version;
-        Timestamp = timestamp;
-        PreviousHash = previousHash;
-        MerkleRootHash = merkleRootHash;
-        DataLen = dataLen;
-        Data = data;
-
-
-    }
-
-    private boolean checkCompatibility(int version, BigInteger height, long timestamp, int dataLen) {
-
-        return checkUnsigned16(version) && checkUnsigned64(height) && checkSigned64(timestamp) && checkUnsigned16(dataLen);
+        this.height = new BigInteger(height, 16);
+        this.version = version;
+        this.timestamp = timestamp;
+        this.previousHash = previousHash;
+        this.merkleRootHash = merkleRootHash;
+        this.dataLen = dataLen;
+        this.data = data;
     }
 
     private boolean checkUnsigned16(int value) {
-        return (value >= 0) && (value < (65536));
+        return (value < 0) || (value >= (65536));
     }
 
     private boolean checkUnsigned64(BigInteger value) {
-        return value.compareTo(BigInteger.ZERO) >= 0;
+        return (value.compareTo(BigInteger.ZERO) >= 0);
     }
 
     private boolean checkSigned64(long value) {
         return (value >= -(Math.pow(2, 63))) && value < (Math.pow(2, 63));
     }
 
+    /**
+     * @return  This function returns the value of version from the data
+     */
     public int getVersion() {
-        return Version;
+        return this.version;
     }
 
+    /**
+     * @return This function returns the value of height from the data
+     */
     public BigInteger getHeight() {
-        return Height;
+        return this.height;
     }
 
+    /**
+     * @return This function returns the value of timestamp from the data
+     */
     public long getTimestamp() {
-        return Timestamp;
+        return this.timestamp;
     }
 
+    /**
+     * @return This function returns the value of previousHash from the data
+     */
     public byte[] getPreviousHash() {
-        return PreviousHash;
+        return this.previousHash;
     }
 
+    /**
+     * @return This function returns the value of merkleRootHash from the data
+     */
     public byte[] getMerkleRootHash() {
-        return MerkleRootHash;
+        return this.merkleRootHash;
     }
 
+    /**
+     * @return This function returns the value of dataLen from the data
+     */
     public int getDataLen() {
-        return DataLen;
+        return this.dataLen;
     }
 
+    /**
+     * @return This function returns the data from the data
+     */
     public byte[][] getData() {
-        return Data;
+        return this.data;
     }
 }

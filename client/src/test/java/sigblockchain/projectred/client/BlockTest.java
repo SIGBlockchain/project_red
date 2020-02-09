@@ -1,17 +1,13 @@
 package sigblockchain.projectred.client;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import java.math.BigInteger;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class BlockTest {
 
     private byte[] previousHash = "Previous Hash".getBytes();
     private byte[] hash = "Block hash".getBytes();
-
     private byte[][] data =
             {
                     {1, 2, 3, 4},
@@ -28,49 +24,49 @@ class BlockTest {
     }
 
     @Test
-    void versionGetter() {
+    void testGetVersion() {
         Block block = new Block(10, "2B", -3556L, previousHash, hash, 10, data);
         int v = block.getVersion();
         assertEquals(v, 10);
     }
 
     @Test
-    void heightGetter() {
+    void testGetHeight() {
         Block block = new Block(10, "2B", -3556L, previousHash, hash, 10, data);
         var v = block.getHeight();
         assertEquals(v, new BigInteger("2B", 16));
     }
 
     @Test
-    void timeStampGetter() {
+    void testGetTimestamp() {
         Block block = new Block(10, "2B", -3556L, previousHash, hash, 10, data);
         long v = block.getTimestamp();
         assertEquals(v, -3556L);
     }
 
     @Test
-    void previousHashGetter() {
+    void testGetPreviousHash() {
         Block block = new Block(10, "2B", -3556L, previousHash, hash, 10, data);
         byte[] v = block.getPreviousHash();
         assertEquals(v, previousHash);
     }
 
     @Test
-    void merkleRootHashGetter() {
+    void testGetMerkleRootHash() {
         Block block = new Block(10, "2B", -3556L, previousHash, hash, 10, data);
         byte[] v = block.getMerkleRootHash();
         assertEquals(v, hash);
     }
 
     @Test
-    void dataLenGetter() {
+    void testGetDataLen() {
         Block block = new Block(10, "2B", -3556L, previousHash, hash, 10, data);
         int v = block.getDataLen();
         assertEquals(v, 10);
     }
 
     @Test
-    void dataGetter() {
+    void testGetData() {
         Block block = new Block(10, "2B", -3556L, previousHash, hash, 10, data);
         byte[][] v = block.getData();
         assertEquals(v, data);
