@@ -1,14 +1,18 @@
 package sigblockchain.projectred.client;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import java.math.BigInteger;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class BlockTest {
 
-    byte[] previousHash = new byte[] {'T', 'I', 'M', 'E'};
-    byte[] hash = new byte[] {1, 2, 3, 4};
-    byte[][] data =
+    private byte[] previousHash = "Previous Hash".getBytes();
+    private byte[] hash = "Block hash".getBytes();
+
+    private byte[][] data =
             {
                     {1, 2, 3, 4},
                     {'H', 'E', 'L', 'L', 'O'},
@@ -16,57 +20,58 @@ class BlockTest {
                     {'W', 'O', 'R', 'L', 'D'}
             };
 
+
     @Test
-    void testConstructor(){
-        Block block = new Block(10, 401L, -3556L, previousHash, hash,10, data);
+    void testConstructor() {
+        Block block = new Block(10, "2B", -3556L, previousHash, hash, 10, data);
         assertNotNull(block);
     }
 
     @Test
-    void versionGetter()    {
-        Block block = new Block(10, 401L, -3556L, previousHash, hash,10, data);
+    void versionGetter() {
+        Block block = new Block(10, "2B", -3556L, previousHash, hash, 10, data);
         int v = block.getVersion();
         assertEquals(v, 10);
     }
 
     @Test
-    void heightGetter()    {
-        Block block = new Block(10, 401L, -3556L, previousHash, hash,10, data);
-        long v = block.getHeight();
-        assertEquals(v, 401L);
+    void heightGetter() {
+        Block block = new Block(10, "2B", -3556L, previousHash, hash, 10, data);
+        var v = block.getHeight();
+        assertEquals(v, new BigInteger("2B", 16));
     }
 
     @Test
-    void timeStampGetter()    {
-        Block block = new Block(10, 401L, -3556L, previousHash, hash,10, data);
+    void timeStampGetter() {
+        Block block = new Block(10, "2B", -3556L, previousHash, hash, 10, data);
         long v = block.getTimestamp();
         assertEquals(v, -3556L);
     }
 
     @Test
-    void previousHashGetter()    {
-        Block block = new Block(10, 401L, -3556L, previousHash, hash,10, data);
+    void previousHashGetter() {
+        Block block = new Block(10, "2B", -3556L, previousHash, hash, 10, data);
         byte[] v = block.getPreviousHash();
         assertEquals(v, previousHash);
     }
 
     @Test
-    void merkleRootHashGetter()    {
-        Block block = new Block(10, 401L, -3556L, previousHash, hash,10, data);
+    void merkleRootHashGetter() {
+        Block block = new Block(10, "2B", -3556L, previousHash, hash, 10, data);
         byte[] v = block.getMerkleRootHash();
         assertEquals(v, hash);
     }
 
     @Test
-    void dataLenGetter()    {
-        Block block = new Block(10, 401L, -3556L, previousHash, hash,10, data);
+    void dataLenGetter() {
+        Block block = new Block(10, "2B", -3556L, previousHash, hash, 10, data);
         int v = block.getDataLen();
         assertEquals(v, 10);
     }
 
     @Test
-    void dataGetter()    {
-        Block block = new Block(10, 401L, -3556L, previousHash, hash,10, data);
+    void dataGetter() {
+        Block block = new Block(10, "2B", -3556L, previousHash, hash, 10, data);
         byte[][] v = block.getData();
         assertEquals(v, data);
     }
