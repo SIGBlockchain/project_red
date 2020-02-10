@@ -45,7 +45,7 @@ public class Block {
     }
 
     private boolean checkUnsigned64(BigInteger value) {
-        return (value.compareTo(BigInteger.ZERO) >= 0);
+        return (value.compareTo(BigInteger.ZERO) >= 0) && (value.compareTo(new BigInteger("ffffffffffffffff", 16)) <= 0);
     }
 
     private boolean checkSigned64(long value) {
