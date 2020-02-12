@@ -53,15 +53,11 @@ public class Account {
         }
     }
 
-    public String getWalletAddress() {
-        return this.walletAddress;
-    }
+    public String getWalletAddress() { return this.walletAddress; }
 
     public BigInteger getBalance() { return this.balance; }
 
-    public BigInteger getStateNonce() {
-        return this.stateNonce;
-    }
+    public BigInteger getStateNonce() { return this.stateNonce; }
 
     public void setBalance(BigInteger balance) {
         validatePositive(balance, "balance");
