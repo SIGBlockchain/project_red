@@ -8,6 +8,16 @@ public class Account {
 	private BigInteger stateNonce;
 
 	/**
+	 * Takes a JSON representation of Account and constructs an Account instance
+	 *
+	 * @param json The json data
+	 * @return An account object containing the information from the json
+	 */
+	public static Account parseJson(String json) {
+		return null;
+	}
+
+	/**
 	 * Represents all the information about a Aurum account. Corresponds to /accountinfo endpoint.
 	 *
 	 * @param walletAddress The public address of the Account
