@@ -38,6 +38,7 @@ public class KeyManager {
 	 * @return a byte array that represents the signature
 	 */
 	public static byte[] sign(ECPrivateKeyParameters privateKey, byte[] data) {
+		//TODO implement
 		return null;
 	}
 
@@ -50,6 +51,7 @@ public class KeyManager {
 	 * @return true if the public key verifies the signature, false it not
 	 */
 	public static boolean verify(ECPublicKeyParameters publicKey, byte[] signature, byte[] data) {
+		// TODO implement
 		return false;
 	}
 }

@@ -71,6 +71,6 @@ class KeyManagerTest {
 
 		var publicKey = new ECPublicKeyParameters(Q, KeyManager.domainParams);
 
-		//TODO create unit tests. 
+		//TODO create unit tests.
 	}
 }
