@@ -100,7 +100,7 @@ public class AccountTest {
 		var account = new Account(addr, balance, nonce);
 
 		var newBalance = new BigInteger("-3", 16);
-		var newNonce = new BigInteger("04", 16);
+		var newNonce = new BigInteger("-4", 16);
 
 
 		try {
