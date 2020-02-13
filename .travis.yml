@@ -1,0 +1,18 @@
+language: go
+
+go: master
+
+services: docker
+
+before_script:
+  - cd scripts/
+  - ./up.ci.sh $TRAVIS_BRANCH # need to fix this to use gopath
+  - cd ../
+
+script:
+  - go test -v ./...
+
+after_script:
+  - cd scripts/
+  - ./down.ci.sh
+  - cd ../
