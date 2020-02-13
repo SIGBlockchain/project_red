@@ -116,7 +116,32 @@ public class AccountTest {
 		} catch (Exception ignored) {
 			assertEquals(account.getStateNonce(), nonce);
 		}
-
-
 	}
+
+	@Test
+	public void testAccountSetters4() {
+		var addr = "81aaf16d7e4b626dc1c34c47bf9973496a3698a6e7ab0255af867169b43529fb";
+		var balance = new BigInteger("1323", 10);
+		var nonce = new BigInteger("4324", 10);
+		var account = new Account(addr, balance, nonce);
+
+		var newBalance = new BigInteger("fffffffffffffffff", 16);
+		var newNonce = new BigInteger("fffffffffffffffff", 16);
+
+
+		try {
+			account.setBalance(newBalance);
+			fail("Allowed to set balance to an invalid value");
+		} catch (Exception ignored) {
+			assertEquals(account.getBalance(), balance);
+		}
+
+		try {
+			account.setStateNonce(newNonce);
+			fail("Allowed to set state nonce to an invalid value");
+		} catch (Exception ignored) {
+			assertEquals(account.getStateNonce(), nonce);
+		}
+	}
+
 }
