@@ -125,8 +125,8 @@ public class AccountTest {
 		var nonce = new BigInteger("4324", 10);
 		var account = new Account(addr, balance, nonce);
 
-		var newBalance = new BigInteger("fffffffffffffffff", 16);
-		var newNonce = new BigInteger("fffffffffffffffff", 16);
+		var newBalance = new BigInteger("100000000000000000", 16);
+		var newNonce = new BigInteger("100000000000000000", 16);
 
 
 		try {
