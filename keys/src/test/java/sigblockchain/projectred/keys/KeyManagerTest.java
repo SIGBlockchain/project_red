@@ -40,7 +40,6 @@ class KeyManagerTest {
         var actualPublicKey = new ECPublicKeyParameters(Q, KeyManager.domainParams);
         var actualPrivateKey = new ECPrivateKeyParameters(expectedPrivateKey, KeyManager.domainParams);
 
-        assertEquals(actualPrivateKey.getD(), expectedPrivateKey);
         assertEquals(actualPublicKey.getQ().getRawXCoord().toBigInteger(), expectedPublicKeyX);
         assertEquals(actualPublicKey.getQ().getRawYCoord().toBigInteger(), expectedPublicKeyY);
 
