@@ -2,10 +2,8 @@ package sigblockchain.projectred.gui;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,26 +13,40 @@ public class Controller {
 	private static final Logger LOG = LogManager.getLogger(Controller.class.getName());
 
 	@FXML
-	private GridPane transactionsPane;
-
-	@FXML
 	private StackPane stack;
 
 	@FXML
-	private Label title;
+	private Pane accountsPane;
 
 	@FXML
-	private TextField balanceView;
+	private Pane keysPane;
 
 	@FXML
-	private TextField addressView;
-
-	@FXML
-	private Button refresh;
-
-	@FXML
-	private void start(ActionEvent event) {
-		LOG.info("Starting controller");
+	private void navToAccounts(ActionEvent event) {
+		LOG.info("Switching to Accounts Pane");
 		System.out.println("Starting controller");
+		var children = stack.getChildren();
+		children.forEach(node -> {
+			node.setVisible(false);
+			node.setDisable(true);
+		});
+
+		accountsPane.setVisible(true);
+		accountsPane.setDisable(false);
+	}
+
+	@FXML
+	private void navToKeysPane(ActionEvent event) {
+		LOG.info("Switching to keys Pane");
+		System.out.println("Starting controller");
+		var children = stack.getChildren();
+		children.forEach(node -> {
+			node.setVisible(false);
+			node.setDisable(true);
+		});
+
+		keysPane.setVisible(true);
+		keysPane.setDisable(false);
+
 	}
 }
