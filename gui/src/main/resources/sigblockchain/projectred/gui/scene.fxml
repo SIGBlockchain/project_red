@@ -9,13 +9,13 @@
 	<center>
 		<StackPane fx:id="stack">
 			<children>
-				<AnchorPane fx:id="accountsPane">
+				<AnchorPane fx:id="accountsPane" id="accountsPane">
 					<children>
 						<fx:include source="accounts.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
 									AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
 					</children>
 				</AnchorPane>
-				<AnchorPane fx:id="keysPane" disable="true" visible="false">
+				<AnchorPane fx:id="keysPane" id="keysPane" disable="true" visible="false">
 					<children>
 						<fx:include source="keys.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
 									AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
@@ -31,7 +31,7 @@
 				<VBox id="NavBarLayout" alignment="TOP_CENTER" spacing="5.0" AnchorPane.bottomAnchor="0.0"
 					  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<children>
-						<Button alignment="TOP_CENTER" mnemonicParsing="false" onAction="#navToAccounts"
+						<Button id="navAccountsBtn" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#navToAccounts"
 								text="Account"/>
 						<Button id="navKeyBtn" alignment="TOP_CENTER" mnemonicParsing="false" onAction="#navToKeysPane"
 								text="Keys"/>
