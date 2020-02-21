@@ -13,9 +13,11 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
     testCompile "org.testfx:testfx-junit5:4.0.16-alpha"
+    testCompile group: 'org.testfx', name: 'testfx-core', version: '4.0.16-alpha'
+
 
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.13.2'
-    testCompile group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-11+23'
+    //testRuntime group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-11+26'
 }
 
 javafx {
@@ -32,6 +34,8 @@ compileTestJava {
 }
 
 test {
+
+
     useJUnitPlatform()
     testLogging {
         events "passed", "skipped", "failed"
@@ -41,18 +45,20 @@ test {
     moduleOptions {
         addExports = [
                 'javafx.graphics/com.sun.javafx.application': 'org.testfx',
-                'javafx.graphics/com.sun.glass.ui'          : 'org.testfx'
+                'javafx.graphics/com.sun.glass.ui'          : 'org.testfx',
         ]
         addReads = [
                 'sigblockchain.projectred.gui': 'org.testfx'
         ]
         if ((org.gradle.internal.os.OperatingSystem.current().windows)) {
             addOpens = [
-                    'javafx.graphics/com.sun.glass.ui.win': 'org.testfx'
+                    'javafx.graphics/com.sun.glass.ui.win': 'org.testfx',
+                    'javafx.graphics/com.sun.glass.ui'    : 'org.testfx'
             ]
-        }else if (org.gradle.internal.os.OperatingSystem.current().linux) { //assuming gtk is being used
+        } else if (org.gradle.internal.os.OperatingSystem.current().linux) { //assuming gtk is being used
             addOpens = [
-                    'javafx.graphics/com.sun.glass.ui.gtk': 'org.testfx'
+                    'javafx.graphics/com.sun.glass.ui.gtk': 'org.testfx',
+                    'javafx.graphics/com.sun.glass.ui'    : 'org.testfx'
             ]
         }
     }

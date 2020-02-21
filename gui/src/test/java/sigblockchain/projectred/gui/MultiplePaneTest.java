@@ -20,6 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MultiplePaneTest {
 
+
 	@Start
 	public void start(Stage stage) throws Exception {
 		Parent root = FXMLLoader.load(Main.class.getResource("scene.fxml"));
