@@ -23,5 +23,4 @@ jobs:
       run: apt-get xvfb
     - name: Test with Gradle
       run: xvfb-run ./gradlew test --info
-      env:
-        _JAVA_OPTIONS: "-Djava.awt.headless=true -Dtestfx.robot=glass -Dtestfx.headless=true -Dprism.order=sw"
+
