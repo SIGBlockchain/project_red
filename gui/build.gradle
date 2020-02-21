@@ -15,7 +15,7 @@ dependencies {
     testCompile "org.testfx:testfx-junit5:4.0.16-alpha"
 
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.13.2'
-
+    testCompile group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-11+23'
 }
 
 javafx {
