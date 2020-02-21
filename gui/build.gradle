@@ -24,7 +24,7 @@ javafx {
 
 //mainClassName = "$moduleName/sigblockchain.projectred.gui.Entry"
 
-compileTestJava{
+compileTestJava {
     moduleOptions {
         addModules = ['org.testfx']
     }
@@ -40,15 +40,21 @@ test {
 
     moduleOptions {
         addExports = [
-                'javafx.graphics/com.sun.javafx.application':'org.testfx',
-                'javafx.graphics/com.sun.glass.ui':'org.testfx'
+                'javafx.graphics/com.sun.javafx.application': 'org.testfx',
+                'javafx.graphics/com.sun.glass.ui'          : 'org.testfx'
         ]
         addReads = [
-                'sigblockchain.projectred.gui' :'org.testfx'
+                'sigblockchain.projectred.gui': 'org.testfx'
         ]
-        addOpens = [
-                'javafx.graphics/com.sun.glass.ui.win' :'org.testfx'
-        ]
+        if ((org.gradle.internal.os.OperatingSystem.current().windows)) {
+            addOpens = [
+                    'javafx.graphics/com.sun.glass.ui.win': 'org.testfx'
+            ]
+        }else if (org.gradle.internal.os.OperatingSystem.current().linux) { //assuming gtk is being used
+            addOpens = [
+                    'javafx.graphics/com.sun.glass.ui.gtk': 'org.testfx'
+            ]
+        }
     }
 }
 
