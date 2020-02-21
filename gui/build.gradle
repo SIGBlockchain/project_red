@@ -13,6 +13,9 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
     testCompile "org.testfx:testfx-junit5:4.0.16-alpha"
+
+    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.13.2'
+
 }
 
 javafx {
@@ -31,7 +34,14 @@ test {
 
     moduleOptions {
         addExports = [
-                'javafx.graphics/com.sun.javafx.application':'org.testfx'
+                'javafx.graphics/com.sun.javafx.application':'org.testfx',
+                'javafx.graphics/com.sun.glass.ui':'org.testfx'
+        ]
+        addReads = [
+                'sigblockchain.projectred.gui' :'org.testfx'
+        ]
+        addOpens = [
+                'javafx.graphics/com.sun.glass.ui.win' :'org.testfx'
         ]
     }
 }
