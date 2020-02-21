@@ -86,6 +86,8 @@ jlink {
     imageZip = file("$buildDir/image-zip/hellofx.zip")
     options = ['--bind-services', '--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
 
+    forceMerge('log4j-api')
+
     launcher {
         name = "Project Red"
     }
