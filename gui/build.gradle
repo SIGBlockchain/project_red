@@ -19,11 +19,20 @@ javafx {
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
+
+
 //mainClassName = "$moduleName/sigblockchain.projectred.gui.Entry"
 test {
     useJUnitPlatform()
     testLogging {
         events "passed", "skipped", "failed"
+    }
+
+
+    moduleOptions {
+        addExports = [
+                'javafx.graphics/com.sun.javafx.application':'org.testfx'
+        ]
     }
 }
 

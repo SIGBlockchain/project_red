@@ -5,12 +5,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
-import org.testfx.framework.junit5.ApplicationTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.framework.junit5.ApplicationExtension;
+import org.testfx.framework.junit5.Start;
 
+@ExtendWith(ApplicationExtension.class)
 
-public class MultiplePaneTest extends ApplicationTest {
+public class MultiplePaneTest {
 
-	@Override
+	@Start
 	public void start(Stage stage) throws Exception {
 		Parent root = FXMLLoader.load(Main.class.getResource("scene.fxml"));
 
@@ -19,7 +22,7 @@ public class MultiplePaneTest extends ApplicationTest {
 	}
 
 	@Test
-	public void testSwitchingPane(){
+	public void testSwitchingPane() {
 
 	}
 }
