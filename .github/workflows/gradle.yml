@@ -19,5 +19,8 @@ jobs:
         java-version: 11
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+    - name: Installing XVFB
+      run: sudo apt-get install xvfb
     - name: Test with Gradle
-      run: ./gradlew test
+      run: xvfb-run ./gradlew test --info
+
