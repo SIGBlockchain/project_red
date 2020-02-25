@@ -1,5 +1,8 @@
 package sigblockchain.projectred.gui;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,16 +16,12 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 import org.testfx.matcher.control.LabeledMatchers;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 @ExtendWith(ApplicationExtension.class)
 
 public class MultiplePaneTest {
 
-
 	@Start
-	public void start(Stage stage) throws Exception {
+	private void start(Stage stage) throws Exception {
 		Parent root = FXMLLoader.load(Main.class.getResource("scene.fxml"));
 
 		stage.setScene(new Scene(root));

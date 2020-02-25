@@ -3,7 +3,6 @@ package sigblockchain.projectred.client;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-
 import java.math.BigInteger;
 import org.junit.jupiter.api.Test;
 
@@ -39,11 +38,9 @@ public class AccountTest {
 		var addr = "81aaf16d7e4b626dc1c34c47bf9973496a3698a6e7ab0255af867169b43529fb";
 		var balance = new BigInteger("-2", 16);
 		var nonce = new BigInteger("-2", 16);
-		try {
-			Account account = new Account(addr, balance, nonce);
-			fail("Account object was allowed to be made with invalid arguments");
-		} catch (Exception ignored) {
-		}
+
+		Account account = new Account(addr, balance, nonce);
+		fail("Account object was allowed to be made with invalid arguments");
 	}
 
 	@Test
