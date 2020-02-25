@@ -38,5 +38,5 @@ jobs:
       - name: run style check on main source sets
         run: ./gradlew checkstyleMain --info
       - name: run style check on test source sets
-          run: ./gradlew checkstyleTest --info
+        run: ./gradlew checkstyleTest --info
 
