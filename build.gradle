@@ -7,6 +7,13 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'org.javamodularity.moduleplugin'
 
+    apply plugin: 'checkstyle'
+
+    checkstyle {
+        toolVersion = '8.29'
+        configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+    }
+
     repositories {
         jcenter()
         mavenCentral()
