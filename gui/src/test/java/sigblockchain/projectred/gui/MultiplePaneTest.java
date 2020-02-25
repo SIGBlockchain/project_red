@@ -21,7 +21,7 @@ import org.testfx.matcher.control.LabeledMatchers;
 public class MultiplePaneTest {
 
 	@Start
-	private void start(Stage stage) throws Exception {
+	public void start(Stage stage) throws Exception {
 		Parent root = FXMLLoader.load(Main.class.getResource("scene.fxml"));
 
 		stage.setScene(new Scene(root));

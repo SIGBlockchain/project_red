@@ -39,8 +39,13 @@ public class AccountTest {
 		var balance = new BigInteger("-2", 16);
 		var nonce = new BigInteger("-2", 16);
 
-		Account account = new Account(addr, balance, nonce);
-		fail("Account object was allowed to be made with invalid arguments");
+		try {
+			Account account = new Account(addr, balance, nonce);
+			fail("Account object was allowed to be made with invalid arguments");
+		} catch (Exception e) {
+			return;
+		}
+
 	}
 
 	@Test
