@@ -1,6 +1,7 @@
 package sigblockchain.projectred.keys;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -63,6 +64,8 @@ class KeyManagerTest {
 	@Test
 	public void testSigning2() {
 		var signature = Hex.decode("3045022100ff2c146535e75f0b5c8fb3548077f799429f72b4eb2e5412e89678b29fb165e3022036332b243d0f28fd05e9dca1be6eb1ff577622148e245732951fdfb71a4e684b");
+		var fakeSignature = Hex.decode("1045022100ff2c146535e75f0b5c8fb3548077f799429f72b4eb2e5412e89678b29fb165e3022036332b243d0f28fd05e9dca1be6eb1ff577622148e245732951fdfb71a4e684b");
+
 		var data = "Data".getBytes();
 		var privateKeyNum = new BigInteger("d8353db7fe564c633f94274d7bc1d7200740e3ac5b617dc1f438feecfebec562", 16);
 		var publicKeyX = new BigInteger("fc3f9fb00cb99faa055c82b6058f21e12b5770dab852a42ec3ad9b236e299366", 16);
@@ -71,6 +74,7 @@ class KeyManagerTest {
 		var constructedPrivateKey = new ECPublicKeyParameters(q, KeyManager.domainParams);
 
 		assertTrue(KeyManager.verify(constructedPrivateKey, signature, data));
+		assertFalse(KeyManager.verify(constructedPrivateKey, fakeSignature, data));
 
 	}
 
