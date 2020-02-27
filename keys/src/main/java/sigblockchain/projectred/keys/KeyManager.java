@@ -1,10 +1,5 @@
 package sigblockchain.projectred.keys;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.math.BigInteger;
-import java.security.SecureRandom;
-
 import org.bouncycastle.asn1.*;
 import org.bouncycastle.asn1.sec.SECNamedCurves;
 import org.bouncycastle.asn1.x9.X9ECParameters;
@@ -16,6 +11,11 @@ import org.bouncycastle.crypto.params.ECPrivateKeyParameters;
 import org.bouncycastle.crypto.params.ECPublicKeyParameters;
 import org.bouncycastle.crypto.signers.ECDSASigner;
 import org.bouncycastle.util.Properties;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.security.SecureRandom;
 
 
 public class KeyManager {
@@ -43,7 +43,7 @@ public class KeyManager {
 	 * @param data       The data that is to be signed
 	 * @return a byte array that represents the signature
 	 */
-	public static byte[] sign(ECPrivateKeyParameters privateKey, byte[] data) throws IOException {
+	public static byte[] sign(ECPrivateKeyParameters privateKey, byte[] data)   {
 //		1. Generate R and S (which are the two components of an ECDSA signature).
 //		Use the  org.bouncycastle.crypto.signers.ECDSASigner object to do so.
 		ECDSASigner signer = new ECDSASigner();
@@ -51,7 +51,11 @@ public class KeyManager {
 		BigInteger[] components = signer.generateSignature(data); //
 
 //		2. Encode R and S into the DER format
-		return encodeDerSignature(components);
+		try {
+			return encodeDerSignature(components);
+		} catch (IOException e) {
+			return null;
+		}
 	}
 
 	/**
