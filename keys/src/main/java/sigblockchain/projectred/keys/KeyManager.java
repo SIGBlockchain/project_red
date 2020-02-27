@@ -44,13 +44,10 @@ public class KeyManager {
 	 * @return a byte array that represents the signature
 	 */
 	public static byte[] sign(ECPrivateKeyParameters privateKey, byte[] data)   {
-//		1. Generate R and S (which are the two components of an ECDSA signature).
-//		Use the  org.bouncycastle.crypto.signers.ECDSASigner object to do so.
 		ECDSASigner signer = new ECDSASigner();
 		signer.init(true, privateKey);
 		BigInteger[] components = signer.generateSignature(data); //
 
-//		2. Encode R and S into the DER format
 		try {
 			return encodeDerSignature(components);
 		} catch (IOException e) {
