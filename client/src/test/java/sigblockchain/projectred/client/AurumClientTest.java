@@ -38,7 +38,7 @@ public class AurumClientTest {
 		}
 		hoverflyRule = HoverflyRule.inSimulationMode(dsl(
 			service(host).
-				get("/accoutinfo")
+				get("/accountinfo")
 					.queryParam("w", validAddress)
 				.willReturn(
 					success(validJson, "application/json"))
