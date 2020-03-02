@@ -45,9 +45,13 @@ public class Account {
 	}
 
 	private void validateUnsigned64(BigInteger n, String s) {
-		if (BigInteger.ZERO.compareTo(n) > 0 && n.compareTo(new BigInteger("ffffffffffffffff", 16)) <= 0) {
-			throw new IllegalArgumentException("Invalid " + s + ":  Not an unsigned 64 bit integer");
+		if (n.compareTo(BigInteger.ZERO) < 0) {
+			throw new IllegalArgumentException("Invalid " + s + ": Cannot be a negative value");
 		}
+		if (n.compareTo(new BigInteger("ffffffffffffffff", 16)) > 0) {
+			throw new IllegalArgumentException("Invalid " + s + ": Exceed 64 bits");
+		}
+
 	}
 
 	public String getWalletAddress() {
