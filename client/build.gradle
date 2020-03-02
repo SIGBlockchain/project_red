@@ -4,8 +4,10 @@ plugins {
 
 dependencies {
     compile group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
-    compile 'io.specto:hoverfly-java:0.12.2' //this dependency is only used in tests, but it needed here
-    compile group: 'io.specto', name: 'hoverfly-java-junit5', version: '0.12.3'
+
+
+    testImplementation 'io.specto:hoverfly-java:0.12.2' //this dependency is only used in tests, but it needed here
+    testImplementation group: 'io.specto', name: 'hoverfly-java-junit5', version: '0.12.3'
 
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
@@ -16,5 +18,11 @@ test {
     useJUnitPlatform()
     testLogging {
         events "passed", "skipped", "failed"
+    }
+
+    moduleOptions {
+        addReads = [
+                'sigblockchain.projectred.client': 'hoverfly.java'
+        ]
     }
 }
