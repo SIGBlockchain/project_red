@@ -33,16 +33,15 @@ public class AurumClient {
 		String address = "http://" + hostname + "/accountinfo?w=" + wallet;
 
 		HttpResponse<String> response = null;
-		try
-		{
+		try {
 			response = httpclient.send(HttpRequest.newBuilder()
 					.GET()
 					.uri(URI.create(address))
 					.setHeader("User-Agent", "Aurum Client")
 					.build(), HttpResponse.BodyHandlers.ofString());
+		} catch (Exception e) {
+			System.err.println(e);
 		}
-		catch(Exception e)
-		{System.err.println(e);}
 
 		Gson gson = new Gson();
 		return gson.fromJson(response.body(), Account.class);
