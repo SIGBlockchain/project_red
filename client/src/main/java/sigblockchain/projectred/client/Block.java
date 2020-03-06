@@ -24,6 +24,7 @@ public class Block {
 	 * @param dataLen        Number of objects in the Data section
 	 * @param data           Actual contents of block
 	 */
+  
 	public Block(int version, String height, long timestamp, byte[] previousHash,
 			byte[] merkleRootHash, int dataLen, byte[][] data) {
 		//Individual values Checking
