@@ -4,10 +4,22 @@ plugins {
 
 dependencies {
     compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.64'
-
-    testCompile project(':keys')
+    compile project(':keys')
+    //testCompile project(path: ':keys', configuration: 'testOutput')
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+}
+
+compileTestJava {
+    moduleOptions {
+        addReads = [
+              'sigblockchain.projectred.client': 'sigblockchain.projectred.keys'
+        ]
+    }
+}
+
+configurations.testCompile.each {
+    println "testCompile: $it"
 }
 
 test {
