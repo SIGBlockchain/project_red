@@ -1,6 +1,14 @@
 package sigblockchain.projectred.keys;
 
-import org.bouncycastle.asn1.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import org.bouncycastle.asn1.ASN1InputStream;
+import org.bouncycastle.asn1.ASN1Integer;
+import org.bouncycastle.asn1.ASN1Primitive;
+import org.bouncycastle.asn1.DERSequenceGenerator;
+import org.bouncycastle.asn1.DLSequence;
 import org.bouncycastle.asn1.sec.SECNamedCurves;
 import org.bouncycastle.asn1.x9.X9ECParameters;
 import org.bouncycastle.crypto.AsymmetricCipherKeyPair;
@@ -12,17 +20,12 @@ import org.bouncycastle.crypto.params.ECPublicKeyParameters;
 import org.bouncycastle.crypto.signers.ECDSASigner;
 import org.bouncycastle.util.Properties;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.math.BigInteger;
-import java.security.SecureRandom;
-
-
 public class KeyManager {
 
 	public static final X9ECParameters ecp = SECNamedCurves.getByName("secp256r1");
 	public static final ECDomainParameters domainParams = new ECDomainParameters(ecp.getCurve(),
-			ecp.getG(), ecp.getN(), ecp.getH(), ecp.getSeed());
+		ecp.getG(), ecp.getN(), ecp.getH(), ecp.getSeed());
+
 
 	/**
 	 * Will generate a public/private key pair according to the NIST P-256 standards.
@@ -30,8 +33,8 @@ public class KeyManager {
 	 * @return a AsymmetricCipherKeyPair object
 	 */
 	public static AsymmetricCipherKeyPair generateKeyPair() {
-		ECKeyGenerationParameters keyGenParams = new ECKeyGenerationParameters(domainParams, new SecureRandom());
-		ECKeyPairGenerator generator = new ECKeyPairGenerator();
+		var keyGenParams = new ECKeyGenerationParameters(domainParams, new SecureRandom());
+		var generator = new ECKeyPairGenerator();
 		generator.init(keyGenParams);
 		return generator.generateKeyPair();
 	}
@@ -65,21 +68,22 @@ public class KeyManager {
 	 */
 	public static boolean verify(ECPublicKeyParameters publicKey, byte[] signature, byte[] data) {
 
-		BigInteger[] rAndS = decodeDerSignature(signature);
-		if (rAndS == null)
+		BigInteger[] randS = decodeDerSignature(signature);
+		if (randS == null) {
 			return false;
-		var r = rAndS[0];
-		var s = rAndS[1];
+		}
+		var r = randS[0];
+		var s = randS[1];
 
 		ECDSASigner signer = new ECDSASigner();
 		signer.init(false, publicKey);
-
-		 return signer.verifySignature(data, r, s);
+		return signer.verifySignature(data, r, s);
 	}
 
-	private static BigInteger[] decodeDerSignature(byte[] signature){
+	private static BigInteger[] decodeDerSignature(byte[] signature) {
 		//first we have to decode the the DER encoded byte array
-		BigInteger r, s;
+		BigInteger r;
+		BigInteger s;
 		ASN1InputStream decoder = null;
 		try {
 			// BouncyCastle by default is strict about parsing ASN.1 integers.

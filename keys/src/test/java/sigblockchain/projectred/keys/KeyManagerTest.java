@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-
 import java.math.BigInteger;
 import org.bouncycastle.crypto.params.ECPrivateKeyParameters;
 import org.bouncycastle.crypto.params.ECPublicKeyParameters;
@@ -13,22 +12,7 @@ import org.bouncycastle.math.ec.FixedPointCombMultiplier;
 import org.bouncycastle.util.encoders.Hex;
 import org.junit.jupiter.api.Test;
 
-
 class KeyManagerTest {
-
-	@Test
-	public void testGenerateKeyPair() {
-		var keyPair = KeyManager.generateKeyPair();
-		var privateKey = (ECPrivateKeyParameters) keyPair.getPrivate();
-		var actualPublicKey = (ECPublicKeyParameters) keyPair.getPublic();
-
-		ECPoint Q = KeyManager.domainParams.getG().multiply(privateKey.getD());
-		var expectedPublicKey = new ECPublicKeyParameters(Q, KeyManager.domainParams);
-		assertEquals(actualPublicKey.getQ().getRawXCoord().toBigInteger(), expectedPublicKey.getQ().getRawXCoord().toBigInteger());
-		assertEquals(actualPublicKey.getQ().getRawYCoord().toBigInteger(), expectedPublicKey.getQ().getRawYCoord().toBigInteger());
-
-	}
-
 
 	@Test
 	public void testEcParameters() {
@@ -38,17 +22,30 @@ class KeyManagerTest {
 		var expectedPublicKeyY = new BigInteger("a797eb07a5d8eef80d5705a7a627c73cf4e683ab98c7245101025be935c4053b", 16);
 
 		var fpMultiplier = new FixedPointCombMultiplier();
-		ECPoint Q = fpMultiplier.multiply(KeyManager.domainParams.getG(), expectedPrivateKey);
+		ECPoint q = fpMultiplier.multiply(KeyManager.domainParams.getG(), expectedPrivateKey);
 
-		var actualPublicKey = new ECPublicKeyParameters(Q, KeyManager.domainParams);
+		var actualPublicKey = new ECPublicKeyParameters(q, KeyManager.domainParams);
 		var actualPrivateKey = new ECPrivateKeyParameters(expectedPrivateKey, KeyManager.domainParams);
 
 		assertEquals(actualPrivateKey.getD(), expectedPrivateKey);
 		assertEquals(actualPublicKey.getQ().getRawXCoord().toBigInteger(), expectedPublicKeyX);
 		assertEquals(actualPublicKey.getQ().getRawYCoord().toBigInteger(), expectedPublicKeyY);
-
 	}
 
+	@Test
+	public void testGenerateKeyPair() {
+		var keyPair = KeyManager.generateKeyPair();
+		var privateKey = (ECPrivateKeyParameters) keyPair.getPrivate();
+		var actualPublicKey = (ECPublicKeyParameters) keyPair.getPublic();
+
+		ECPoint q = KeyManager.domainParams.getG().multiply(privateKey.getD());
+		var expectedPublicKey = new ECPublicKeyParameters(q, KeyManager.domainParams);
+		assertEquals(actualPublicKey.getQ().getRawXCoord().toBigInteger(),
+			expectedPublicKey.getQ().getRawXCoord().toBigInteger());
+		assertEquals(actualPublicKey.getQ().getRawYCoord().toBigInteger(),
+			expectedPublicKey.getQ().getRawYCoord().toBigInteger());
+
+	}
 
 	@Test
 	public void testSigning1() {
@@ -63,8 +60,12 @@ class KeyManagerTest {
 
 	@Test
 	public void testSigning2() {
-		var signature = Hex.decode("3045022100ff2c146535e75f0b5c8fb3548077f799429f72b4eb2e5412e89678b29fb165e3022036332b243d0f28fd05e9dca1be6eb1ff577622148e245732951fdfb71a4e684b");
-		var fakeSignature = Hex.decode("1045022100ff2c146535e75f0b5c8fb3548077f799429f72b4eb2e5412e89678b29fb165e3022036332b243d0f28fd05e9dca1be6eb1ff577622148e245732951fdfb71a4e684b");
+		var signature = Hex.decode(
+			"3045022100ff2c146535e75f0b5c8fb3548077f799429f72b4eb2e5412e89678b29fb16"
+				+ "5e3022036332b243d0f28fd05e9dca1be6eb1ff577622148e245732951fdfb71a4e684b");
+		var fakeSignature = Hex.decode(
+			"1045022100ff2c146535e75f0b5c8fb3548077f799429f72b4eb2e5412e89678b29fb16"
+				+ "5e3022036332b243d0f28fd05e9dca1be6eb1ff577622148e245732951fdfb71a4e684b");
 
 		var data = "Data".getBytes();
 		var privateKeyNum = new BigInteger("d8353db7fe564c633f94274d7bc1d7200740e3ac5b617dc1f438feecfebec562", 16);
@@ -77,5 +78,4 @@ class KeyManagerTest {
 		assertFalse(KeyManager.verify(constructedPrivateKey, fakeSignature, data));
 
 	}
-
 }
