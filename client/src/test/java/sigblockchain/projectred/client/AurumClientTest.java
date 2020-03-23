@@ -7,7 +7,6 @@ import static io.specto.hoverfly.junit.dsl.matchers.HoverflyMatchers.startsWith;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-
 import io.specto.hoverfly.junit.core.Hoverfly;
 import io.specto.hoverfly.junit.rule.HoverflyRule;
 import io.specto.hoverfly.junit5.HoverflyExtension;
@@ -30,6 +29,9 @@ public class AurumClientTest {
 
 	private static HoverflyRule hoverflyRule;
 
+	/**
+	 *  Gets a JSON resources from the resources directory.
+	 */
 	@BeforeAll
 	public static void setUpJsonResponse() {
 		var inputStream = ClassLoader.getSystemClassLoader().getResourceAsStream(jsonFile);
@@ -42,12 +44,11 @@ public class AurumClientTest {
 	}
 
 
-
 	@Test
 	public void testGetAccount(Hoverfly hoverfly) {
 		hoverfly.simulate(dsl(
-			service(host).
-				get(startsWith("/accountinfo"))
+			service(host)
+				.get(startsWith("/accountinfo"))
 				.queryParam("w", validAddress)
 				.willReturn(
 					success(validJson, "application/json"))
