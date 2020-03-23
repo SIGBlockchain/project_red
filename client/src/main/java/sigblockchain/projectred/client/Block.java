@@ -35,6 +35,7 @@ public class Block {
 			throw new IllegalArgumentException("Invalid Input dataLen");
 		}
 
+
 		this.height = new BigInteger(height, 16);
 		this.version = version;
 		this.timestamp = timestamp;
