@@ -22,18 +22,19 @@ public class Block {
 	 */
 	public Block(int version, String height, long timestamp, byte[] previousHash, byte[] merkleRootHash, int dataLen, byte[][] data) {
 		//Individual values Checking
-        if (checkUnsigned16(version)) {
-            throw new IllegalArgumentException("Invalid Input version");
-        }
-        if (!checkUnsigned64(new BigInteger(height, 16))) {
-            throw new IllegalArgumentException("Invalid Input height");
-        }
-        if (!checkSigned64(timestamp)) {
-            throw new IllegalArgumentException("Invalid Input timeStamp");
-        }
-        if (checkUnsigned16(dataLen)) {
-            throw new IllegalArgumentException("Invalid Input dataLen");
-        }
+		if (checkUnsigned16(version)) {
+			throw new IllegalArgumentException("Invalid Input version");
+		}
+		if (!checkUnsigned64(new BigInteger(height, 16))) {
+			throw new IllegalArgumentException("Invalid Input height");
+		}
+		if (!checkSigned64(timestamp)) {
+			throw new IllegalArgumentException("Invalid Input timeStamp");
+		}
+		if (checkUnsigned16(dataLen)) {
+			throw new IllegalArgumentException("Invalid Input dataLen");
+		}
+
 
 		this.height = new BigInteger(height, 16);
 		this.version = version;
